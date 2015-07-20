@@ -39,15 +39,6 @@ module DeviseTokenAuth::Concerns::User
     # get rid of dead tokens
     before_save :destroy_expired_tokens
 
-    # don't use default devise email validation
-    def email_required?
-      false
-    end
-
-    def email_changed?
-      false
-    end
-
     # override devise method to include additional info as opts hash
     def send_confirmation_instructions(opts=nil)
       unless @raw_confirmation_token
@@ -230,13 +221,6 @@ module DeviseTokenAuth::Concerns::User
     res += "##{uri.fragment}" if uri.fragment
 
     return res
-  end
-
-  # only validate unique email among users that registered by email
-  def unique_email_user
-    if provider == 'email' and self.class.where(provider: 'email', email: email).count > 0
-      errors.add(:email, :already_in_use, default: "address is already in use")
-    end
   end
 
   def set_empty_token_hash
