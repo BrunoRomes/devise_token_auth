@@ -606,7 +606,7 @@ class DeviseTokenAuth::RegistrationsControllerTest < ActionDispatch::Integration
       end
     end
 
-    describe "Ouath user has existing email" do
+    describe "Oauth user has existing email" do
       before do
         @existing_user = users(:duplicate_email_facebook_user)
 
